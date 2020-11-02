@@ -1,0 +1,105 @@
+<template>
+ <div>
+    <div class="max">
+        <div class="box">
+            <div class="mox"> 
+                <div class="pop">
+                    <div><p>旅游攻略&nbsp;&nbsp; </p></div>
+                    <div>/&nbsp;&nbsp;旅游详情</div>
+                </div>
+                <div class="titte" v-for="(item,index) in msg" :key="index">
+                    <div>{{item.title}}</div>
+                </div>
+                <div class="henxian"></div>
+                <div  v-for="(item,index) in msg" :key="index">
+                    <div>攻略：{{item.created_at}}&nbsp;&nbsp;&nbsp;阅读：{{item.watch}}</div>
+                </div>
+            </div>
+
+
+            <div></div>
+        </div>
+    </div>  
+ </div>
+</template>
+
+<script lang='ts'>
+import dayjs from'dayjs'
+import {defineComponent, reactive, toRefs, SetupContext,onMounted} from 'vue'
+import {useRoute,useRouter} from'vue-router'
+import api from'../../http/api'
+interface Data {
+    id:string
+    msg:Array<object>
+}
+ export default defineComponent({
+   name: '',
+   props: {
+   },
+   components: {
+
+   },
+setup(props, ctx: SetupContext){
+    let router=useRouter()
+    let route=useRoute()
+
+
+onMounted(()=>{
+    data.id=route.query.id as string
+
+    api.getpostwen({id:Number(data.id)}).then(res=>{
+        res.data[0].created_at=dayjs(res.data[0].created_at).format('YYYY-MM-DD HH:mm:ss')
+        data.msg=res.data
+        console.log(res)
+    }).catch((err:any)=>{
+        console.log(err)
+    })
+
+})
+
+
+let data: Data = reactive<Data>({
+    id:'',
+    msg:[]
+})
+return {
+...toRefs(data),
+
+}
+},
+ })
+</script>
+
+<style scoped lang='scss'>
+.max{
+    display: flex;
+    justify-content: center;
+   
+}
+.box{
+ width: 55vw;  
+}
+.pop{
+    margin: 8px 0px;
+    font-size: 16px;
+    display: flex;
+    div{
+        p{
+            color: black;
+        }
+    }
+}
+.mox{
+    width: 36vw;
+}
+.titte{
+    font-size: 32px;
+    color: black;
+    font-weight: 600;
+}
+.henxian{
+    width: 100%;
+    border: 1px solid rgb(238,238,238);
+    margin: 10px 0px;
+}
+</style>

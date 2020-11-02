@@ -1,0 +1,37 @@
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+
+import layout from '../layout/Layout.vue'
+
+const routes: Array<RouteRecordRaw> = [
+ {
+  path:'',
+  component:layout,
+  children:[
+    {
+      path: '',
+      name: 'Home',
+      component:()=>import('../views/Home.vue')
+    },
+    {
+      path: '/travel',
+      name: 'travel',
+      component: ()=>import('../components/Travel/Travel.vue')
+    },
+  
+  ]
+ },
+
+   
+ 
+
+ 
+ 
+]
+
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+
+export default router

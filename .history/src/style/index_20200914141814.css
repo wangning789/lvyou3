@@ -1,0 +1,22 @@
+.df{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dfa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ziti{
+    font-size: 18px;
+}
+.pa{
+    padding: 20px 10px;
+}
+.paa{
+    padding: 0px 10px;
+}
+.co{
+    color: black;
+}

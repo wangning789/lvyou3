@@ -1,0 +1,10 @@
+.df{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dfa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
